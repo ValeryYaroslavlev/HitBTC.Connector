@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitBTC.Connector", "HitBTC.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitBTC.Connector.Console", "HitBTC.Connector.Console\HitBTC.Connector.Console.csproj", "{E5D76C93-9543-446A-856B-C4946695533F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitBTC.Connector.Tests", "HitBTC.Connector.Tests\HitBTC.Connector.Tests.csproj", "{EAD7B03D-D40B-429B-B3ED-BFF1148FD683}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E5D76C93-9543-446A-856B-C4946695533F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5D76C93-9543-446A-856B-C4946695533F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5D76C93-9543-446A-856B-C4946695533F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAD7B03D-D40B-429B-B3ED-BFF1148FD683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAD7B03D-D40B-429B-B3ED-BFF1148FD683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAD7B03D-D40B-429B-B3ED-BFF1148FD683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAD7B03D-D40B-429B-B3ED-BFF1148FD683}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

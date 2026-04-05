@@ -91,10 +91,17 @@ public sealed class HitBtcErrorResponse
 public static class DecimalExtensions
 {
     /// <summary>
-    /// Форматирует decimal без trailing zeros для API запросов.
+    /// Форматирует decimal без trailing zeros и без научной нотации для API запросов.
     /// </summary>
     public static string ToApiString(this decimal value)
     {
-        return value.ToString("G29", CultureInfo.InvariantCulture);
+        if (value == 0m)
+            return "0";
+
+        // Получаем строку в fixed-point формате с максимальной точностью
+        var str = value.ToString("0.############################",
+            System.Globalization.CultureInfo.InvariantCulture);
+
+        return str;
     }
 }

@@ -5,7 +5,7 @@ using HitBTC.Connector.Trading;
 
 // ============ ПРИМЕР 1: Только REST ============
 
-await using var restClient = new HitBtcRestClient("-qvb9jj_LeGg-QfMiZ89-grAv_O0fCae", "VDKZuSuhpbS-qmneeae19KFb6UFtCZhz");
+await using var restClient = new HitBtcRestClient("YOUR_API_KEY", "YOUR_SECRET_KEY");
 
 // Публичные данные
 var symbols = await restClient.GetSymbolsAsync(new[] { "BTCUSDT", "ETHBTC" });
@@ -28,22 +28,22 @@ foreach (var c in candles)
 }
 
 // Спот ордера
-//var spotOrders = await restClient.GetActiveSpotOrdersAsync();
-//Console.WriteLine($"Active spot orders: {spotOrders.Length}");
+var spotOrders = await restClient.GetActiveSpotOrdersAsync();
+Console.WriteLine($"Active spot orders: {spotOrders.Length}");
 
-//var newOrder = await restClient.CreateSpotOrderAsync(new CreateSpotOrderRequest
-//{
-//    Symbol = "OPENUSDT",
-//    Side = OrderSide.Buy,
-//    Quantity = 1,
-//    Price = 0.000010m,
-//    Type = OrderType.Limit,
-//    PostOnly = false
-//});
-//Console.WriteLine($"Created: {newOrder.ClientOrderId}, status={newOrder.Status}");
+var newOrder = await restClient.CreateSpotOrderAsync(new CreateSpotOrderRequest
+{
+    Symbol = "OPENUSDT",
+    Side = OrderSide.Buy,
+    Quantity = 1,
+    Price = 0.000010m,
+    Type = OrderType.Limit,
+    PostOnly = false
+});
+Console.WriteLine($"Created: {newOrder.ClientOrderId}, status={newOrder.Status}");
 
-//var canceled = await restClient.CancelSpotOrderAsync(newOrder.ClientOrderId);
-//Console.WriteLine($"Canceled: {canceled.Status}");
+var canceled = await restClient.CancelSpotOrderAsync(newOrder.ClientOrderId);
+Console.WriteLine($"Canceled: {canceled.Status}");
 
 // Фьючерсы
 
@@ -56,7 +56,7 @@ var futureOrder = await restClient.CreateFuturesOrderAsync( new CreateFuturesOrd
     Type = OrderType.Limit
 });
 
-var canceled = await restClient.CancelFuturesOrderAsync(futureOrder.ClientOrderId);
+var futureCanceled = await restClient.CancelFuturesOrderAsync(futureOrder.ClientOrderId);
 Console.WriteLine($"Canceled: {canceled.Status}");
 
 
@@ -104,7 +104,7 @@ account = await restClient.CloseMarginAccountAsync(
 Console.WriteLine($"Account closed. Balance: {account.Currencies[0].MarginBalance}");
 
 // Через TradingEngine
-await using var engine = new TradingEngine("-qvb9jj_LeGg-QfMiZ89-grAv_O0fCae", "VDKZuSuhpbS-qmneeae19KFb6UFtCZhz");
+await using var engine = new TradingEngine("YOUR_API_KEY", "YOUR_SECRET_KEY");
 await engine.StartAsync();
 
 // Создаём аккаунт и сразу торгуем

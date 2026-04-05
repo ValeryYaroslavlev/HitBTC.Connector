@@ -74,9 +74,17 @@ public sealed class OrderBook : IDisposable
     {
         var ob = new OrderBook(Math.Max(snapshot.Ask.Length, snapshot.Bid.Length));
 
-        if (DateTime.TryParse(snapshot.Timestamp, out var ts))
-            ob.Timestamp = ts;
+        // Парсим как UTC
+        if (DateTimeOffset.TryParse(
+            snapshot.Timestamp,
+            System.Globalization.CultureInfo.InvariantCulture,
+            System.Globalization.DateTimeStyles.RoundtripKind,
+            out var ts))
+        {
+            ob.Timestamp = ts.UtcDateTime;
+        }
 
+        // ... остальной код без изменений
         Span<OrderBookLevel> asks = stackalloc OrderBookLevel[snapshot.Ask.Length];
         for (int i = 0; i < snapshot.Ask.Length; i++)
         {
