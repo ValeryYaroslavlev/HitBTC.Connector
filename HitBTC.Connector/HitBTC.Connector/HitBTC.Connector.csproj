@@ -7,5 +7,75 @@
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<Optimize>true</Optimize>
 		<LangVersion>latest</LangVersion>
+
+		<!-- ═══════════ NuGet Package Metadata ═══════════ -->
+		<PackageId>HitBTC.Connector</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Valery Yaroslavlev</Authors>
+		<Company>Valery Yaroslavlev</Company>
+
+		<Description>High-performance, lock-free C# .NET 9 connector for HitBTC cryptocurrency exchange API v3. Supports REST API (public/spot/futures trading) and WebSocket (real-time market data). Zero-allocation design for high-frequency trading.</Description>
+
+		<Copyright>Copyright © 2026 Valery Yaroslavlev</Copyright>
+
+		<PackageTags>hitbtc;hitbtc-api;cryptocurrency;crypto-exchange;trading-bot;crypto-trading;csharp;dotnet;dotnet9;rest-api;websocket;api-wrapper;algorithmic-trading;high-frequency-trading;futures-trading;spot-trading;market-data;orderbook;lock-free;high-performance;bitcoin;fintech</PackageTags>
+
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+		<PackageProjectUrl>https://github.com/ValeryYaroslavlev/HitBTC.Connector</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/ValeryYaroslavlev/HitBTC.Connector</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+		<!-- Symbols для отладки -->
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedAllSources>true</EmbedAllSources>
+
+		<Deterministic>true</Deterministic>
+		<ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+
+		<!-- Release Notes -->
+		<PackageReleaseNotes>
+			Initial release v1.0.0:
+			• Full HitBTC API v3 support (REST + WebSocket)
+			• Spot trading (orders, balances)
+			• Futures trading (margin accounts, positions, leverage)
+			• Real-time market data (order book, trades, candles)
+			• Lock-free high-performance architecture
+			• HS256 HMAC authentication
+			• Comprehensive unit and integration tests
+		</PackageReleaseNotes>
+
 	</PropertyGroup>
+
+	<!-- ═══════════ Включение файлов в пакет ═══════════ -->
+	<ItemGroup>
+		<!-- Иконка (должна быть PNG, рекомендуется 128x128 или 64x64) -->
+		<None Include="icon.png" Pack="true" PackagePath="\">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+
+		<!-- README -->
+		<None Include="README.md" Pack="true" PackagePath="\">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+
+		<!-- LICENSE (опционально, но рекомендуется) -->
+		<None Include="LICENSE" Pack="true" PackagePath="\" Condition="Exists('LICENSE')" />
+	</ItemGroup>
+
+	<!-- ═══════════ Документация XML (для IntelliSense) ═══════════ -->
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);CS1591</NoWarn>
+		<!-- Отключить предупреждения о отсутствующих XML комментариях -->
+	</PropertyGroup>
+
 </Project>
+
