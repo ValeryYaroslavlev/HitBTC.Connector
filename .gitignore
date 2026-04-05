@@ -1,0 +1,10 @@
+﻿################################################################################
+# Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/HitBTC.Connector/.vs/HitBTC.Connector
+/HitBTC.Connector/HitBTC.Connector/bin/Debug/net9.0
+/HitBTC.Connector/HitBTC.Connector/obj
+/HitBTC.Connector/HitBTC.Connector.Console/bin/Debug/net9.0
+/HitBTC.Connector/HitBTC.Connector.Console/obj
