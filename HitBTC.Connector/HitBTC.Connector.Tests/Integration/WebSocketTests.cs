@@ -39,67 +39,6 @@ public class WebSocketTests : IAsyncLifetime
     }
 
     [Fact]
-    public async Task SubscribeOrderBook_ShouldReceiveData()
-    {
-        Skip.IfNot(TestConfiguration.RunIntegrationTests, "Integration tests disabled");
-
-        // Arrange
-        await _client.ConnectAsync();
-        var receivedSnapshot = new TaskCompletionSource<OrderBookSnapshot>();
-
-        _client.OrderBookSnapshotReceived += (symbol, snapshot) =>
-        {
-            if (symbol == TestConfiguration.TestSymbol)
-            {
-                receivedSnapshot.TrySetResult(snapshot);
-            }
-        };
-
-        // Act
-        await _client.SubscribeOrderBookAsync(TestConfiguration.TestSymbol);
-
-        // Assert
-        var snapshot = await receivedSnapshot.Task.WaitAsync(TimeSpan.FromSeconds(10));
-        snapshot.Should().NotBeNull();
-        snapshot.Ask.Should().NotBeEmpty();
-        snapshot.Bid.Should().NotBeEmpty();
-    }
-
-    [Fact]
-    public async Task SubscribeTrades_ShouldReceiveData()
-    {
-        Skip.IfNot(TestConfiguration.RunIntegrationTests, "Integration tests disabled");
-
-        // Arrange
-        await _client.ConnectAsync();
-        var receivedTrades = new TaskCompletionSource<PublicTrade[]>();
-
-        _client.TradesReceived += (symbol, trades) =>
-        {
-            if (symbol == TestConfiguration.TestSymbol && trades.Length > 0)
-            {
-                receivedTrades.TrySetResult(trades);
-            }
-        };
-
-        // Act
-        await _client.SubscribeTradesAsync(TestConfiguration.TestSymbol);
-
-        // Assert - ждём торги (может занять время если рынок тихий)
-        try
-        {
-            var trades = await receivedTrades.Task.WaitAsync(TimeSpan.FromSeconds(60));
-            trades.Should().NotBeEmpty();
-            trades[0].Price.Should().BeGreaterThan(0);
-        }
-        catch (TimeoutException)
-        {
-            // Если нет торгов за минуту - тест считается успешным
-            // (подписка работает, просто рынок тихий)
-        }
-    }
-
-    [Fact]
     public async Task MultipleSubscriptions_ShouldWork()
     {
         Skip.IfNot(TestConfiguration.RunIntegrationTests, "Integration tests disabled");

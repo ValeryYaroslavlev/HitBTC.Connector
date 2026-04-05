@@ -1,4 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿// Core/Models/Candle.cs
+using System.Text.Json.Serialization;
+
+using HitBTC.Connector.Core.Converters;
 
 namespace HitBTC.Connector.Core.Models;
 
@@ -8,26 +11,26 @@ public sealed class Candle
     public DateTime Timestamp { get; set; }
 
     [JsonPropertyName("open")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Open { get; set; }
 
     [JsonPropertyName("close")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Close { get; set; }
 
     [JsonPropertyName("min")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Low { get; set; }
 
     [JsonPropertyName("max")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal High { get; set; }
 
     [JsonPropertyName("volume")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Volume { get; set; }
 
     [JsonPropertyName("volume_quote")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal VolumeQuote { get; set; }
 }

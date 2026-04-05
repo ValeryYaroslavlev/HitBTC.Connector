@@ -1,4 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿// Core/Models/Balance.cs
+using System.Text.Json.Serialization;
+
+using HitBTC.Connector.Core.Converters;
 
 namespace HitBTC.Connector.Core.Models;
 
@@ -8,19 +11,19 @@ public sealed class FuturesBalance
     public string Currency { get; set; } = string.Empty;
 
     [JsonPropertyName("available")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Available { get; set; }
 
     [JsonPropertyName("reserved")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Reserved { get; set; }
 
     [JsonPropertyName("reserved_margin")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal ReservedMargin { get; set; }
 
     [JsonPropertyName("cross_margin_reserved")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal CrossMarginReserved { get; set; }
 }
 
@@ -30,10 +33,10 @@ public sealed class WalletBalance
     public string Currency { get; set; } = string.Empty;
 
     [JsonPropertyName("available")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Available { get; set; }
 
     [JsonPropertyName("reserved")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Reserved { get; set; }
 }

@@ -1,4 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿// Core/Models/Symbol.cs
+using System.Text.Json.Serialization;
+
+using HitBTC.Connector.Core.Converters;
 
 namespace HitBTC.Connector.Core.Models;
 
@@ -17,19 +20,19 @@ public sealed class SymbolInfo
     public string Status { get; set; } = string.Empty;
 
     [JsonPropertyName("quantity_increment")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal QuantityIncrement { get; set; }
 
     [JsonPropertyName("tick_size")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal TickSize { get; set; }
 
     [JsonPropertyName("take_rate")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal TakeRate { get; set; }
 
     [JsonPropertyName("make_rate")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal MakeRate { get; set; }
 
     [JsonPropertyName("fee_currency")]
@@ -39,7 +42,7 @@ public sealed class SymbolInfo
     public bool MarginTrading { get; set; }
 
     [JsonPropertyName("max_initial_leverage")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeNullableDecimalConverter))]
     public decimal? MaxInitialLeverage { get; set; }
 
     [JsonPropertyName("contract_type")]

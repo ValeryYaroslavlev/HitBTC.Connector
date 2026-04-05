@@ -14,7 +14,7 @@ namespace HitBTC.Connector.Tests.Integration;
 public class MarginAccountTests : IAsyncLifetime
 {
     private HitBtcRestClient _client = null!;
-    private const string TestFuturesSymbol = "BTCUSDT_PERP";
+    private const string TestFuturesSymbol = "XRPUSDT_PERP";
 
     public Task InitializeAsync()
     {
@@ -51,7 +51,7 @@ public class MarginAccountTests : IAsyncLifetime
             account = await _client.CreateOrUpdateMarginAccountAsync(
                 MarginMode.Isolated,
                 TestFuturesSymbol,
-                marginBalance: 1m,  // Минимум для теста
+                marginBalance: 0.1m,  // Минимум для теста
                 leverage: 10m);
 
             // Assert
@@ -59,7 +59,7 @@ public class MarginAccountTests : IAsyncLifetime
             account.Symbol.Should().Be(TestFuturesSymbol);
             account.Leverage.Should().Be(10m);
             account.Currencies.Should().NotBeEmpty();
-            account.Currencies[0].MarginBalance.Should().Be(1m);
+            account.Currencies[0].MarginBalance.Should().Be(0.1m);
         }
         finally
         {
@@ -83,7 +83,7 @@ public class MarginAccountTests : IAsyncLifetime
             await _client.CreateOrUpdateMarginAccountAsync(
                 MarginMode.Isolated,
                 TestFuturesSymbol,
-                marginBalance: 1m,
+                marginBalance: 0.1m,
                 leverage: 10m);
 
             // Act - update leverage
@@ -110,7 +110,7 @@ public class MarginAccountTests : IAsyncLifetime
             var account = await _client.CreateOrUpdateMarginAccountAsync(
                 MarginMode.Isolated,
                 TestFuturesSymbol,
-                marginBalance: 5m,
+                marginBalance: 0.1m,
                 leverage: 10m);
 
             var initialBalance = account.Currencies[0].MarginBalance;
@@ -119,17 +119,17 @@ public class MarginAccountTests : IAsyncLifetime
             var afterAdd = await _client.AddMarginAsync(
                 MarginMode.Isolated,
                 TestFuturesSymbol,
-                amount: 2m);
+                amount: 0.05m);
 
-            afterAdd.Currencies[0].MarginBalance.Should().Be(initialBalance + 2m);
+            afterAdd.Currencies[0].MarginBalance.Should().Be(initialBalance + 0.05m);
 
             // Remove margin
             var afterRemove = await _client.RemoveMarginAsync(
                 MarginMode.Isolated,
                 TestFuturesSymbol,
-                amount: 1m);
+                amount: 0.1m);
 
-            afterRemove.Currencies[0].MarginBalance.Should().Be(initialBalance + 1m);
+            afterRemove.Currencies[0].MarginBalance.Should().Be(0.05m);
         }
         finally
         {
@@ -152,7 +152,7 @@ public class MarginAccountTests : IAsyncLifetime
         await _client.CreateOrUpdateMarginAccountAsync(
             MarginMode.Isolated,
             TestFuturesSymbol,
-            marginBalance: 1m,
+            marginBalance: 0.1m,
             leverage: 10m);
 
         // Act - Close

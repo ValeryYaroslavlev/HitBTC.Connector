@@ -1,4 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿// Core/Models/FuturesAccount.cs
+using System.Text.Json.Serialization;
+
+using HitBTC.Connector.Core.Converters;
 
 namespace HitBTC.Connector.Core.Models;
 
@@ -11,7 +14,7 @@ public sealed class FuturesMarginAccount
     public string Type { get; set; } = string.Empty;
 
     [JsonPropertyName("leverage")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeNullableDecimalConverter))]
     public decimal? Leverage { get; set; }
 
     [JsonPropertyName("created_at")]
@@ -36,27 +39,27 @@ public sealed class MarginCurrency
     public string Code { get; set; } = string.Empty;
 
     [JsonPropertyName("margin_balance")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal MarginBalance { get; set; }
 
     [JsonPropertyName("reserved_orders")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal ReservedOrders { get; set; }
 
     [JsonPropertyName("reserved_positions")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal ReservedPositions { get; set; }
 
     [JsonPropertyName("margin_call_margin")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeNullableDecimalConverter))]
     public decimal? MarginCallMargin { get; set; }
 
     [JsonPropertyName("liquidation_margin")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeNullableDecimalConverter))]
     public decimal? LiquidationMargin { get; set; }
 
     [JsonPropertyName("debt_sum")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeNullableDecimalConverter))]
     public decimal? DebtSum { get; set; }
 }
 
@@ -69,30 +72,34 @@ public sealed class MarginPosition
     public string Symbol { get; set; } = string.Empty;
 
     [JsonPropertyName("quantity")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Quantity { get; set; }
+
+    [JsonPropertyName("leverage")]
+    [JsonConverter(typeof(SafeNullableDecimalConverter))]
+    public decimal? Leverage { get; set; }
 
     [JsonPropertyName("margin_mode")]
     public string MarginMode { get; set; } = string.Empty;
 
     [JsonPropertyName("price_entry")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal PriceEntry { get; set; }
 
     [JsonPropertyName("price_margin_call")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal PriceMarginCall { get; set; }
 
     [JsonPropertyName("price_liquidation")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal PriceLiquidation { get; set; }
 
     [JsonPropertyName("pnl")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Pnl { get; set; }
 
     [JsonPropertyName("fee_cumulative")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeNullableDecimalConverter))]
     public decimal? FeeCumulative { get; set; }
 
     [JsonPropertyName("created_at")]

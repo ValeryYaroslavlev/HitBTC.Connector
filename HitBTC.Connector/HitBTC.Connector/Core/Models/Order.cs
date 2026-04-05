@@ -1,6 +1,8 @@
 ﻿// Core/Models/Order.cs
 using System.Text.Json.Serialization;
 
+using HitBTC.Connector.Core.Converters;
+
 namespace HitBTC.Connector.Core.Models;
 
 public sealed class SpotOrder
@@ -27,26 +29,26 @@ public sealed class SpotOrder
     public TimeInForce TimeInForce { get; set; }
 
     [JsonPropertyName("quantity")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Quantity { get; set; }
 
     [JsonPropertyName("price")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeNullableDecimalConverter))]
     public decimal? Price { get; set; }
 
     [JsonPropertyName("stop_price")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeNullableDecimalConverter))]
     public decimal? StopPrice { get; set; }
 
     [JsonPropertyName("quantity_cumulative")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal QuantityCumulative { get; set; }
 
     [JsonPropertyName("post_only")]
     public bool PostOnly { get; set; }
 
     [JsonPropertyName("display_quantity")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeNullableDecimalConverter))]
     public decimal? DisplayQuantity { get; set; }
 
     [JsonPropertyName("created_at")]
@@ -80,19 +82,19 @@ public sealed class FuturesOrder
     public TimeInForce TimeInForce { get; set; }
 
     [JsonPropertyName("quantity")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Quantity { get; set; }
 
     [JsonPropertyName("price")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeNullableDecimalConverter))]
     public decimal? Price { get; set; }
 
     [JsonPropertyName("stop_price")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeNullableDecimalConverter))]
     public decimal? StopPrice { get; set; }
 
     [JsonPropertyName("quantity_cumulative")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal QuantityCumulative { get; set; }
 
     [JsonPropertyName("post_only")]
@@ -108,11 +110,11 @@ public sealed class FuturesOrder
     public string MarginMode { get; set; } = "isolated";
 
     [JsonPropertyName("display_quantity")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeNullableDecimalConverter))]
     public decimal? DisplayQuantity { get; set; }
 
     [JsonPropertyName("price_average")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeNullableDecimalConverter))]
     public decimal? PriceAverage { get; set; }
 
     [JsonPropertyName("created_at")]
@@ -134,15 +136,15 @@ public sealed class FuturesTrade
     public long PositionId { get; set; }
 
     [JsonPropertyName("quantity")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Quantity { get; set; }
 
     [JsonPropertyName("price")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Price { get; set; }
 
     [JsonPropertyName("fee")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Fee { get; set; }
 
     [JsonPropertyName("taker")]

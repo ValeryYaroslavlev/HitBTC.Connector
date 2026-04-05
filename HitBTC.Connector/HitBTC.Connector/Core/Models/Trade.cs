@@ -1,4 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿// Core/Models/Trade.cs
+using System.Text.Json.Serialization;
+
+using HitBTC.Connector.Core.Converters;
 
 namespace HitBTC.Connector.Core.Models;
 
@@ -8,11 +11,11 @@ public sealed class PublicTrade
     public long Id { get; set; }
 
     [JsonPropertyName("price")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Price { get; set; }
 
     [JsonPropertyName("quantity")]
-    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+    [JsonConverter(typeof(SafeDecimalConverter))]
     public decimal Quantity { get; set; }
 
     [JsonPropertyName("side")]
