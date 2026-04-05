@@ -1,0 +1,2 @@
+# HitBTC.Connector
+HitBTC Connector
