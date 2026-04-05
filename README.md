@@ -6,16 +6,17 @@ License
 ## High-performance, lock-free C# connector for HitBTC cryptocurrency exchange API v3.
 
 ### ✨ Features
-### 🚀 High Performance — Lock-free data structures, zero-allocation hot paths, ArrayPool usage
-### 🔒 Thread-Safe — MPSC queues, concurrent collections, safe for multi-threaded trading
-### 📡 REST API — Full support for public, spot, and futures endpoints
-### 🔌 WebSocket — Real-time market data and order updates
-### 🔐 Authentication — HS256 HMAC signature with automatic request signing
-### 💪 Robust — Safe decimal parsing, comprehensive error handling
-### 🧪 Tested — Unit, integration, and stress tests included
+
+#### 🚀 High Performance — Lock-free data structures, zero-allocation hot paths, ArrayPool usage
+#### 🔒 Thread-Safe — MPSC queues, concurrent collections, safe for multi-threaded trading
+#### 📡 REST API — Full support for public, spot, and futures endpoints
+#### 🔌 WebSocket — Real-time market data and order updates
+#### 🔐 Authentication — HS256 HMAC signature with automatic request signing
+#### 💪 Robust — Safe decimal parsing, comprehensive error handling
+#### 🧪 Tested — Unit, integration, and stress tests included
 
 
-## 📦 Installation
+### 📦 Installation
 
 ```Bash
 
@@ -31,8 +32,8 @@ dotnet add package HitBTC.Connector
 
 ```
 
-## 🚀 Quick Start
-### REST Client — Public Data
+### 🚀 Quick Start
+#### REST Client — Public Data
 
 ```csharp
 
@@ -60,7 +61,7 @@ foreach (var c in candles)
 }
 ```
 
-## REST Client — Spot Trading
+#### REST Client — Spot Trading
 
 ```csharp
 
@@ -95,7 +96,7 @@ var canceled = await client.CancelSpotOrderAsync(replaced.ClientOrderId);
 // Cancel all orders
 await client.CancelAllSpotOrdersAsync(symbol: "BTCUSDT");
 ```
-## REST Client — Futures Trading
+#### REST Client — Futures Trading
 ```csharp
 
 await using var client = new HitBtcRestClient("YOUR_API_KEY", "YOUR_SECRET_KEY");
@@ -139,9 +140,9 @@ await client.CloseMarginAccountAsync(MarginMode.Isolated, "BTCUSDT_PERP");
 ```
 
 
-## 📋 API Coverage
+### 📋 API Coverage
 
-### REST API
+#### REST API
 Category|	Endpoints|	Status|
 |-------|------------|--------|
 Public|	Symbols, OrderBook, Candles, Trades	|✅|
@@ -151,10 +152,10 @@ Futures Balance|	Get Balance by Currency	|✅|
 Margin Management|	Create/Update/Close Accounts, Leverage|	✅|
 
 
-## ⚡ Performance Features
-### Lock-Free Object Pool — Reuse objects without locks
-### MPSC Queue — Multi-producer single-consumer for WebSocket messages
-### ValueStringBuilder — Stack-allocated string building
-### ArrayPool — Rent/return buffers for OrderBook levels
-### Span/Memory — Zero-copy data access where possible
-### SocketsHttpHandler — HTTP/2, connection pooling
+### ⚡ Performance Features
+#### - Lock-Free Object Pool — Reuse objects without locks
+#### - MPSC Queue — Multi-producer single-consumer for WebSocket messages
+#### - ValueStringBuilder — Stack-allocated string building
+#### - ArrayPool — Rent/return buffers for OrderBook levels
+#### - Span/Memory — Zero-copy data access where possible
+#### - SocketsHttpHandler — HTTP/2, connection pooling
