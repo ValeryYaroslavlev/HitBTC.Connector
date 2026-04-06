@@ -137,12 +137,12 @@ public sealed class HitBtcRestClient : IHitBtcRestClient
         if (from.HasValue)
         {
             sb.Append("&from=");
-            sb.Append(from.Value.ToString("O"));
+            sb.Append(from.Value.ToString("u"));
         }
         if (till.HasValue)
         {
             sb.Append("&till=");
-            sb.Append(till.Value.ToString("O"));
+            sb.Append(till.Value.ToString("u"));
         }
 
         return await PublicGetAsync<Candle[]>(sb.ToString(), ct)

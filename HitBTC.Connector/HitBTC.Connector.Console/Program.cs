@@ -27,6 +27,12 @@ foreach (var c in candles)
     Console.WriteLine($"{c.Timestamp}: O={c.Open} H={c.High} L={c.Low} C={c.Close} V={c.Volume}");
 }
 
+candles = await restClient.GetCandlesAsync("BTCUSDT", CandlePeriod.H1, from: DateTime.Now.AddYears(-1), till: DateTime.Now,  limit: 5);
+foreach (var c in candles)
+{
+    Console.WriteLine($"{c.Timestamp}: O={c.Open} H={c.High} L={c.Low} C={c.Close} V={c.Volume}");
+}
+
 // Спот ордера
 var spotOrders = await restClient.GetActiveSpotOrdersAsync();
 Console.WriteLine($"Active spot orders: {spotOrders.Length}");
